@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://6lx2whpnlsjl"]
+[gd_scene load_steps=7 format=3 uid="uid://6lx2whpnlsjl"]
 
 [ext_resource type="Texture2D" uid="uid://dvmctmxwj2ab2" path="res://assets/World/Bush.png" id="1_6w01o"]
 [ext_resource type="PackedScene" uid="uid://7sddgac8ct48" path="res://scene/player.tscn" id="1_bh0us"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_mxxsy"]
 [ext_resource type="Script" path="res://scene/timebar.gd" id="4_km8pk"]
+[ext_resource type="Texture2D" uid="uid://dfb1nsem51ga5" path="res://assets/Effects/rain-drop.png" id="5_4x0r3"]
+
+[sub_resource type="Gradient" id="Gradient_yknif"]
+colors = PackedColorArray(0.381703, 0.381703, 0.381703, 1, 1, 1, 1, 1)
 
 [node name="world" type="Node2D"]
 
@@ -14,6 +18,24 @@ position = Vector2(143, 103)
 [node name="bush" type="Sprite2D" parent="."]
 position = Vector2(65, 89)
 texture = ExtResource("1_6w01o")
+
+[node name="Rain" type="CPUParticles2D" parent="."]
+position = Vector2(149, -34)
+rotation = -0.0905553
+amount = 200
+preprocess = 2.0
+local_coords = true
+texture = ExtResource("5_4x0r3")
+emission_shape = 3
+emission_rect_extents = Vector2(200, 0)
+direction = Vector2(0, 1)
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 200.0
+angle_max = 3.0
+scale_amount_min = 0.2
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_yknif")
 
 [node name="Timer" type="Node2D" parent="."]
 
