@@ -13,13 +13,13 @@ func get_input() :
 	
 func _physics_process(delta: float):
 	var direction = get_input()
-	print("the direction is: ", direction)
+	#print("the direction is: ", direction)
 	if direction != Vector2.ZERO:
 		velocity += direction * ACCELERATION 
 		velocity =  velocity.normalized() * MAX_SPEED 
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
-	print("the velocity is: ", velocity)
+	#print("the velocity is: ", velocity)
 		
 	move_and_slide()
 	pass
