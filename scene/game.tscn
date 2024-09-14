@@ -78,4 +78,9 @@ value = 17.49
 show_percentage = false
 script = ExtResource("4_km8pk")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1, 1, 68, 187, 318, 239, 0, 240, -19, 109, -17, 44)
+
 [connection signal="timeout" from="Timer/Timer" to="Timer/Timer" method="_on_timeout"]
