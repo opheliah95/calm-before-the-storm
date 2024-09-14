@@ -1,13 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://6lx2whpnlsjl"]
+[gd_scene load_steps=10 format=3 uid="uid://6lx2whpnlsjl"]
 
 [ext_resource type="Texture2D" uid="uid://dvmctmxwj2ab2" path="res://assets/World/Bush.png" id="1_6w01o"]
 [ext_resource type="PackedScene" uid="uid://7sddgac8ct48" path="res://scene/player.tscn" id="1_bh0us"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_mxxsy"]
 [ext_resource type="Script" path="res://scene/timebar.gd" id="4_km8pk"]
+[ext_resource type="Script" path="res://scene/rain.gd" id="4_sj83q"]
 [ext_resource type="Texture2D" uid="uid://dfb1nsem51ga5" path="res://assets/Effects/rain-drop.png" id="5_4x0r3"]
 
 [sub_resource type="Gradient" id="Gradient_yknif"]
 colors = PackedColorArray(0.381703, 0.381703, 0.381703, 1, 1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n6cq"]
+bg_color = Color(0.729412, 0.6, 0.6, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nftfo"]
+bg_color = Color(0.427451, 0.6, 0.6, 1)
 
 [node name="world" type="Node2D"]
 
@@ -20,8 +31,10 @@ position = Vector2(65, 89)
 texture = ExtResource("1_6w01o")
 
 [node name="Rain" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(149, -34)
 rotation = -0.0905553
+emitting = false
 amount = 200
 preprocess = 2.0
 local_coords = true
@@ -36,22 +49,33 @@ angle_max = 3.0
 scale_amount_min = 0.2
 scale_amount_max = 0.8
 color_ramp = SubResource("Gradient_yknif")
+script = ExtResource("4_sj83q")
 
 [node name="Timer" type="Node2D" parent="."]
 
 [node name="Timer" type="Timer" parent="Timer"]
 unique_name_in_owner = true
 process_callback = 0
-wait_time = 10.0
+wait_time = 2.0
 one_shot = true
 script = ExtResource("3_mxxsy")
 
-[node name="Time-Visual" type="Line2D" parent="Timer"]
-position = Vector2(103, 11)
-points = PackedVector2Array(0, 0, 47.7556, 0, 100, 0)
-closed = true
-default_color = Color(0.45098, 0.352941, 1, 1)
+[node name="ProgressBar" type="ProgressBar" parent="Timer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 286.0
+offset_bottom = 20.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_8n6cq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nftfo")
+value = 17.49
+show_percentage = false
 script = ExtResource("4_km8pk")
 
 [connection signal="timeout" from="Timer/Timer" to="Timer/Timer" method="_on_timeout"]
-[connection signal="timeout" from="Timer/Timer" to="Timer/Time-Visual" method="_on_timer_timeout"]
