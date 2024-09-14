@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://7sddgac8ct48"]
+[gd_scene load_steps=16 format=3 uid="uid://7sddgac8ct48"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_4nydv"]
 [ext_resource type="Texture2D" uid="uid://rh2mg042uo7w" path="res://assets/Player/character-animated-idle-sheet-full.png" id="2_220k3"]
@@ -179,6 +179,8 @@ _data = {
 "run-side": SubResource("Animation_8bqru")
 }
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_crt5l"]
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(16, 16)
 script = ExtResource("1_4nydv")
@@ -188,24 +190,27 @@ metadata/_edit_group_ = true
 position = Vector2(-1.25, 1)
 shape = SubResource("RectangleShape2D_nup8e")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_ofe8y")
 }
 
 [node name="Player_Idle" type="Sprite2D" parent="."]
-visible = false
+unique_name_in_owner = true
 texture_filter = 1
 texture = ExtResource("2_220k3")
 hframes = 12
 
 [node name="Player_Run_Front" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 visible = false
 texture_filter = 1
 texture = ExtResource("3_06gjs")
 hframes = 7
 
 [node name="Player_Run_Back" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 visible = false
 texture_filter = 1
 texture = ExtResource("4_hleew")
@@ -213,7 +218,13 @@ hframes = 7
 frame = 1
 
 [node name="Player_Run_Side" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
 texture_filter = 1
 texture = ExtResource("5_g10cb")
 hframes = 7
 frame = 1
+
+[node name="PlayerAnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_crt5l")
+anim_player = NodePath("../PlayerAnimationPlayer")
