@@ -5,9 +5,10 @@ const ACCELERATION=100;
 const DECELERATION = 500;
 
 var animationPlayer = null;
-
+var sprite = null;
 func _ready():
-	animationPlayer = $PlayerAnimationPlayer
+	animationPlayer = %PlayerAnimationPlayer
+	sprite = %Player_Sprites
 	pass
 
 func get_input() :
@@ -16,18 +17,19 @@ func get_input() :
 	
 func _physics_process(delta: float):
 	var direction = get_input()
+	var horizontal_dir = Input.get_axis("left", "right")
+	
+	# flip sprite if it is facing right
+	if horizontal_dir !=0:
+		sprite.flip_h = (horizontal_dir == 1)
 	#print("the direction is: ", direction)
 	if direction != Vector2.ZERO:
 		velocity += direction * ACCELERATION 
 		velocity =  velocity.normalized() * MAX_SPEED 
-		%Player_Idle.visible = false
-		%Player_Run_Front.visible = true
-		%PlayerAnimationPlayer.play("run-front")
+		
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
-		%Player_Idle.visible = true
-		%Player_Run_Front.visible = false
-		%PlayerAnimationPlayer.play("idle-front")
+
 	#print("the velocity is: ", velocity)
 		
 	move_and_slide()
