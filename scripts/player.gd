@@ -9,6 +9,7 @@ var direction = null
 var coin_count = 0
 var health = 5;
 var hunger = 0;
+const WIN = 20
 
 func _ready():
 	direction = Vector2.DOWN
@@ -41,6 +42,8 @@ func _physics_process(delta: float):
 func collect_coin():
 	coin_count += 1
 	%Coin.text = "Coins: %d" % coin_count
+	if coin_count >= WIN:
+		%Win.show()
 
 func remove_coin(cost):
 	coin_count -= cost

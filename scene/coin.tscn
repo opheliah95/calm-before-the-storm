@@ -9,11 +9,9 @@
 script = ExtResource("1_51yiv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(219, 107)
 texture = ExtResource("2_6x4dv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(219, 107)
 shape = SubResource("CircleShape2D_qr3eo")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
