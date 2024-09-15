@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://6lx2whpnlsjl"]
+[gd_scene load_steps=9 format=3 uid="uid://6lx2whpnlsjl"]
 
-[ext_resource type="Texture2D" uid="uid://dvmctmxwj2ab2" path="res://assets/World/Bush.png" id="1_6w01o"]
 [ext_resource type="PackedScene" uid="uid://7sddgac8ct48" path="res://scene/player.tscn" id="1_bh0us"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_mxxsy"]
 [ext_resource type="Script" path="res://scene/timebar.gd" id="4_km8pk"]
@@ -26,13 +25,9 @@ bg_color = Color(0.427451, 0.6, 0.6, 1)
 unique_name_in_owner = true
 position = Vector2(143, 103)
 
-[node name="bush" type="Sprite2D" parent="."]
-position = Vector2(65, 89)
-texture = ExtResource("1_6w01o")
-
-[node name="Rain" type="CPUParticles2D" parent="."]
+[node name="Rain" type="CPUParticles2D" parent="Player"]
 unique_name_in_owner = true
-position = Vector2(149, -34)
+position = Vector2(6, -137)
 rotation = -0.0905553
 emitting = false
 amount = 200
@@ -51,16 +46,18 @@ scale_amount_max = 0.8
 color_ramp = SubResource("Gradient_yknif")
 script = ExtResource("4_sj83q")
 
-[node name="Timer" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Timer" type="Timer" parent="Timer"]
+[node name="Rain_Timer" type="Node2D" parent="CanvasLayer"]
+
+[node name="Timer" type="Timer" parent="CanvasLayer/Rain_Timer"]
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 2.0
 one_shot = true
 script = ExtResource("3_mxxsy")
 
-[node name="ProgressBar" type="ProgressBar" parent="Timer"]
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Rain_Timer"]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -78,4 +75,4 @@ value = 17.49
 show_percentage = false
 script = ExtResource("4_km8pk")
 
-[connection signal="timeout" from="Timer/Timer" to="Timer/Timer" method="_on_timeout"]
+[connection signal="timeout" from="CanvasLayer/Rain_Timer/Timer" to="CanvasLayer/Rain_Timer/Timer" method="_on_timeout"]

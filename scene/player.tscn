@@ -1,6 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://7sddgac8ct48"]
+[gd_scene load_steps=45 format=3 uid="uid://7sddgac8ct48"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_4nydv"]
+[ext_resource type="Texture2D" uid="uid://csn7cna8rwgcj" path="res://assets/Effects/shadow.png" id="2_0mqqn"]
 [ext_resource type="Texture2D" uid="uid://rh2mg042uo7w" path="res://assets/Player/character-animated-idle-sheet-full.png" id="2_220k3"]
 [ext_resource type="Texture2D" uid="uid://d4jicr6k1btyl" path="res://assets/Player/character-animated-run-front.png" id="3_06gjs"]
 [ext_resource type="Texture2D" uid="uid://cyer1bry4l81s" path="res://assets/Player/run-back-sprite-form.png" id="4_hleew"]
@@ -454,6 +455,13 @@ position = Vector2(16, 16)
 script = ExtResource("1_4nydv")
 metadata/_edit_group_ = true
 
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.705882)
+texture_filter = 1
+position = Vector2(-1, 30)
+scale = Vector2(0.920002, 1.08)
+texture = ExtResource("2_0mqqn")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.25, -4)
 shape = SubResource("RectangleShape2D_nup8e")
@@ -477,3 +485,5 @@ tree_root = SubResource("AnimationNodeStateMachine_7166l")
 anim_player = NodePath("../PlayerAnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 1)
 parameters/Run/blend_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
