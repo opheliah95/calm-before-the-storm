@@ -1,6 +1,6 @@
 extends CPUParticles2D
 
-var wait_time = 1
+var wait_time = 2.5
 var damage = 1;
 @onready var rain_particles = %Rain  # Reference to the rain Particle2D node
 @onready var increase_rate_timer = %RainIncreaseTimer  # Timer to increase emission ra

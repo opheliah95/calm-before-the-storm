@@ -42,18 +42,88 @@ y_sort_enabled = true
 [node name="Coin" parent="." instance=ExtResource("6_geki3")]
 position = Vector2(50, 161)
 
-[node name="shelter" type="Area2D" parent="."]
-position = Vector2(9, 92)
+[node name="shelters" type="Node2D" parent="."]
+position = Vector2(284, -219)
+
+[node name="shelter2" type="Area2D" parent="shelters"]
 script = ExtResource("7_rwvn1")
 
-[node name="Sprite2D" type="Sprite2D" parent="shelter"]
+[node name="Sprite2D" type="Sprite2D" parent="shelters/shelter2"]
 texture = ExtResource("8_2fuds")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shelter"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shelters/shelter2"]
 position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_5qrra")
 
-[node name="WarningLabel" type="Label" parent="shelter"]
+[node name="WarningLabel" type="Label" parent="shelters/shelter2"]
+visible = false
+offset_left = -65.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 49.0
+size_flags_horizontal = 4
+text = "Not enough Coin"
+
+[node name="Label" type="Label" parent="shelters/shelter2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -52.0
+offset_right = 29.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5 Coins"
+
+[node name="shelter2" type="Area2D" parent="shelters/shelter2"]
+position = Vector2(249, 506)
+script = ExtResource("7_rwvn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="shelters/shelter2/shelter2"]
+texture = ExtResource("8_2fuds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shelters/shelter2/shelter2"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_5qrra")
+
+[node name="WarningLabel" type="Label" parent="shelters/shelter2/shelter2"]
+visible = false
+offset_left = -65.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 49.0
+size_flags_horizontal = 4
+text = "Not enough Coin"
+
+[node name="Label" type="Label" parent="shelters/shelter2/shelter2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -52.0
+offset_right = 29.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5 Coins"
+
+[node name="shelter" type="Area2D" parent="shelters"]
+position = Vector2(-142, 246)
+script = ExtResource("7_rwvn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="shelters/shelter"]
+texture = ExtResource("8_2fuds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shelters/shelter"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_5qrra")
+
+[node name="WarningLabel" type="Label" parent="shelters/shelter"]
 unique_name_in_owner = true
 visible = false
 offset_left = -65.0
@@ -63,7 +133,41 @@ offset_bottom = 49.0
 size_flags_horizontal = 4
 text = "Not enough Coin"
 
-[node name="Label" type="Label" parent="shelter"]
+[node name="Label" type="Label" parent="shelters/shelter"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -52.0
+offset_right = 29.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5 Coins"
+
+[node name="shelter3" type="Area2D" parent="shelters"]
+position = Vector2(-354, 96)
+script = ExtResource("7_rwvn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="shelters/shelter3"]
+texture = ExtResource("8_2fuds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shelters/shelter3"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_5qrra")
+
+[node name="WarningLabel" type="Label" parent="shelters/shelter3"]
+visible = false
+offset_left = -65.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 49.0
+size_flags_horizontal = 4
+text = "Not enough Coin"
+
+[node name="Label" type="Label" parent="shelters/shelter3"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -104,6 +208,7 @@ script = ExtResource("4_sj83q")
 
 [node name="RainIncreaseTimer" type="Timer" parent="Player/Rain"]
 unique_name_in_owner = true
+wait_time = 5.0
 
 [node name="Rain_SFX" type="AudioStreamPlayer" parent="Player/Rain"]
 unique_name_in_owner = true
@@ -136,7 +241,7 @@ uppercase = true
 [node name="Timer" type="Timer" parent="UI/Rain_Timer"]
 unique_name_in_owner = true
 process_callback = 0
-wait_time = 2.0
+wait_time = 10.0
 one_shot = true
 script = ExtResource("3_mxxsy")
 
@@ -174,6 +279,20 @@ offset_right = 43.0
 offset_bottom = 71.0
 text = "Coin: 0"
 
+[node name="Label" type="Label" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -40.0
+offset_right = 62.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Collect 20 coins to win"
+
 [node name="Transition" parent="." instance=ExtResource("9_mknui")]
 unique_name_in_owner = true
 
@@ -193,6 +312,7 @@ progress = 1209.63
 [node name="Win" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 script = ExtResource("13_28f62")
 
 [node name="ColorRect" type="ColorRect" parent="Win"]
@@ -234,9 +354,20 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Play Again"
 
-[connection signal="body_entered" from="shelter" to="shelter" method="_on_body_entered"]
-[connection signal="body_exited" from="shelter" to="shelter" method="_on_body_exited"]
-[connection signal="body_exited" from="shelter" to="Player" method="_on_shelter_body_exited"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="body_entered" from="shelters/shelter2" to="shelters/shelter2" method="_on_body_entered"]
+[connection signal="body_exited" from="shelters/shelter2" to="Player" method="_on_shelter_body_exited"]
+[connection signal="body_exited" from="shelters/shelter2" to="shelters/shelter2" method="_on_body_exited"]
+[connection signal="body_entered" from="shelters/shelter2/shelter2" to="shelters/shelter2/shelter2" method="_on_body_entered"]
+[connection signal="body_exited" from="shelters/shelter2/shelter2" to="Player" method="_on_shelter_body_exited"]
+[connection signal="body_exited" from="shelters/shelter2/shelter2" to="shelters/shelter2/shelter2" method="_on_body_exited"]
+[connection signal="body_entered" from="shelters/shelter" to="shelters/shelter" method="_on_body_entered"]
+[connection signal="body_exited" from="shelters/shelter" to="shelters/shelter" method="_on_body_exited"]
+[connection signal="body_exited" from="shelters/shelter" to="Player" method="_on_shelter_body_exited"]
+[connection signal="body_entered" from="shelters/shelter3" to="shelters/shelter3" method="_on_body_entered"]
+[connection signal="body_exited" from="shelters/shelter3" to="Player" method="_on_shelter_body_exited"]
+[connection signal="body_exited" from="shelters/shelter3" to="shelters/shelter3" method="_on_body_exited"]
 [connection signal="timeout" from="Player/Rain/RainIncreaseTimer" to="Player/Rain" method="_on_rain_increase_timer_timeout"]
 [connection signal="timeout" from="UI/Rain_Timer/Timer" to="UI/Rain_Timer/Timer" method="_on_timeout"]
 [connection signal="pressed" from="Win/ColorRect/Label/Button" to="Win" method="_on_button_pressed"]

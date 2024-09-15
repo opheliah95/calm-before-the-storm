@@ -23,11 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 		else :
 			body.remove_coin(cost)
 			days += 1
-			%Rain.hide()
-			%Rain.emitting = false
-			# play rain sound
-			%Rain_SFX.playing = false
-			%Rain.restart() # clear all spawned particles
+			reset_rain()
 			%Timer.reset_countdown()
 			%Transition.transition()
 			%Day.text = "Days: %d" %days
@@ -43,3 +39,11 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_warning_timeout():
 	# Hide the warning label after 1 second
 	$WarningLabel.visible = false
+
+func reset_rain():
+	%Rain.hide()
+	%Rain.emitting = false
+	# play rain sound
+	%Rain_SFX.playing = false
+	%Rain.restart() # clear all spawned particles
+	%RainIncreaseTimer.stop()
