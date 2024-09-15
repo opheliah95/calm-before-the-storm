@@ -3,12 +3,11 @@ extends CharacterBody2D
 const SPEED = 150;
 const ACCELERATION=100;
 const DECELERATION = 500;
-
-var animationPlayer = null;
+var animation_state = null;
 var sprite = null;
 func _ready():
-	animationPlayer = %PlayerAnimationPlayer
 	sprite = %Player_Sprites
+	animation_state = %PlayerAnimationTree.get("parameters/playback")
 	pass
 
 func get_input() :
@@ -24,11 +23,13 @@ func _physics_process(delta: float):
 	# flip sprite if it is facing right
 	if horizontal_dir !=0:
 		sprite.flip_h = (horizontal_dir == 1)
-	#print("the direction is: ", direction)
+	print("the direction is: ", direction)
 	if velocity.length() > 0:
-		%PlayerAnimationPlayer.play("run-front")
+		%PlayerAnimationTree.set("parameters/Run/blend_position", direction)
+		animation_state.travel("Run")
 	else:
-		%PlayerAnimationPlayer.play("idle-front")
+		%PlayerAnimationTree.set("parameters/Idle/blend_position", direction)
+		animation_state.travel("Idle")
 
 	#print("the velocity is: ", velocity)
 		
