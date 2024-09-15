@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 150;
+const SPEED = 150;
 const ACCELERATION=100;
 const DECELERATION = 500;
 
@@ -18,19 +18,19 @@ func get_input() :
 func _physics_process(delta: float):
 	var direction = get_input()
 	var horizontal_dir = Input.get_axis("left", "right")
+	velocity = direction * SPEED
+	move_and_slide()
 	
 	# flip sprite if it is facing right
 	if horizontal_dir !=0:
 		sprite.flip_h = (horizontal_dir == 1)
 	#print("the direction is: ", direction)
-	if direction != Vector2.ZERO:
-		velocity += direction * ACCELERATION 
-		velocity =  velocity.normalized() * MAX_SPEED 
-		
+	if velocity.length() > 0:
+		%PlayerAnimationPlayer.play("run-front")
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
+		%PlayerAnimationPlayer.play("idle-front")
 
 	#print("the velocity is: ", velocity)
 		
-	move_and_slide()
+	
 	pass

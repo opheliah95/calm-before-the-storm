@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7sddgac8ct48"]
+[gd_scene load_steps=15 format=3 uid="uid://7sddgac8ct48"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_4nydv"]
 [ext_resource type="Texture2D" uid="uid://rh2mg042uo7w" path="res://assets/Player/character-animated-idle-sheet-full.png" id="2_220k3"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwtuhuohiexsm" path="res://assets/Player/character-animated-run-side.png" id="5_g10cb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nup8e"]
-size = Vector2(11.5, 24)
+size = Vector2(11.5, 40)
 
 [sub_resource type="Animation" id="Animation_t3ud3"]
 resource_name = "idle-front"
@@ -311,27 +311,13 @@ _data = {
 "run-side": SubResource("Animation_8bqru")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h0otd"]
-animation = &"idle-front"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fxc4a"]
-animation = &"run-side"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_crt5l"]
-states/End/position = Vector2(880, 100)
-states/idle-front/node = SubResource("AnimationNodeAnimation_h0otd")
-states/idle-front/position = Vector2(424, 59)
-states/run-side/node = SubResource("AnimationNodeAnimation_fxc4a")
-states/run-side/position = Vector2(424, 124)
-graph_offset = Vector2(-29, -16)
-
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(16, 16)
 script = ExtResource("1_4nydv")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.25, 1)
+position = Vector2(-1.25, -4)
 shape = SubResource("RectangleShape2D_nup8e")
 
 [node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -345,7 +331,3 @@ unique_name_in_owner = true
 texture_filter = 1
 texture = ExtResource("2_220k3")
 hframes = 12
-
-[node name="PlayerAnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_crt5l")
-anim_player = NodePath("../PlayerAnimationPlayer")
