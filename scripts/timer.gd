@@ -1,6 +1,7 @@
 extends Timer
 
 @onready var time_bar = %ProgressBar 
+@onready var increase_rate_timer = %RainIncreaseTimer
 func _ready():
 	%Timer.start()
 	time_bar.max_value = wait_time
@@ -15,6 +16,7 @@ func _ready():
 func _on_timeout() -> void:
 	%Rain.show()
 	%Rain.emitting = true
+	increase_rate_timer.start()
 
 
 func _process(delta: float) -> void:

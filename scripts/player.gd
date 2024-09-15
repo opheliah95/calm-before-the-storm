@@ -7,7 +7,7 @@ var animation_state = null;
 var sprite = null;
 var direction = null
 var coin_count = 0
-var health = 100;
+var health = 5;
 var hunger = 0;
 
 func _ready():
@@ -50,3 +50,11 @@ func remove_coin(cost):
 
 func count_coin():
 	return coin_count
+
+func take_damage(damage):
+	if health > 0:
+		health -= damage
+		%Health.text = "Health: %d" % health
+	if (health <= 0):
+		%GameOver.show()
+		
