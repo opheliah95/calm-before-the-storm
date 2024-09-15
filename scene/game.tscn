@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://6lx2whpnlsjl"]
+[gd_scene load_steps=15 format=3 uid="uid://6lx2whpnlsjl"]
 
 [ext_resource type="PackedScene" uid="uid://7sddgac8ct48" path="res://scene/player.tscn" id="1_bh0us"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_mxxsy"]
@@ -6,9 +6,10 @@
 [ext_resource type="Script" path="res://scripts/rain.gd" id="4_sj83q"]
 [ext_resource type="Texture2D" uid="uid://dfb1nsem51ga5" path="res://assets/Effects/rain-drop.png" id="5_4x0r3"]
 [ext_resource type="PackedScene" uid="uid://caj820lqjr2yg" path="res://coin.tscn" id="6_geki3"]
-[ext_resource type="Script" path="res://scene/shelter.gd" id="7_rwvn1"]
+[ext_resource type="Script" path="res://scripts/shelter.gd" id="7_rwvn1"]
 [ext_resource type="Texture2D" uid="uid://4hykiwn5105d" path="res://assets/Items/shulter.png" id="8_2fuds"]
 [ext_resource type="PackedScene" uid="uid://dhg0ir8jeinbn" path="res://scene/transition.tscn" id="9_mknui"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="10_ovpgt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qrra"]
 size = Vector2(31, 40)
@@ -151,7 +152,51 @@ position = Vector2(-71, 73)
 [node name="Transition" parent="." instance=ExtResource("9_mknui")]
 unique_name_in_owner = true
 
+[node name="GameOver" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+script = ExtResource("10_ovpgt")
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0687983, 0.0687983, 0.0687983, 1)
+
+[node name="Gameover" type="Label" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -59.0
+offset_right = 44.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+
+[node name="Button" type="Button" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -15.5
+offset_right = 25.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Retry
+"
+
 [connection signal="body_entered" from="shelter" to="shelter" method="_on_body_entered"]
 [connection signal="body_exited" from="shelter" to="shelter" method="_on_body_exited"]
 [connection signal="body_exited" from="shelter" to="Player" method="_on_shelter_body_exited"]
 [connection signal="timeout" from="UI/Rain_Timer/Timer" to="UI/Rain_Timer/Timer" method="_on_timeout"]
+[connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
