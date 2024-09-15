@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/shelter.gd" id="7_rwvn1"]
 [ext_resource type="Texture2D" uid="uid://4hykiwn5105d" path="res://assets/Items/shulter.png" id="8_2fuds"]
 [ext_resource type="PackedScene" uid="uid://dhg0ir8jeinbn" path="res://scene/transition.tscn" id="9_mknui"]
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="10_ovpgt"]
+[ext_resource type="PackedScene" uid="uid://c3uwmpyvlcoq" path="res://scene/game_over.tscn" id="10_po5nc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qrra"]
 size = Vector2(31, 40)
@@ -152,51 +152,10 @@ position = Vector2(-71, 73)
 [node name="Transition" parent="." instance=ExtResource("9_mknui")]
 unique_name_in_owner = true
 
-[node name="GameOver" type="CanvasLayer" parent="."]
+[node name="GameOver" parent="." instance=ExtResource("10_po5nc")]
 unique_name_in_owner = true
-process_mode = 2
-visible = false
-script = ExtResource("10_ovpgt")
-
-[node name="ColorRect" type="ColorRect" parent="GameOver"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0687983, 0.0687983, 0.0687983, 1)
-
-[node name="Gameover" type="Label" parent="GameOver"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -59.0
-offset_right = 44.0
-offset_bottom = -36.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Game Over"
-
-[node name="Button" type="Button" parent="GameOver"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -15.5
-offset_right = 25.0
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Retry
-"
 
 [connection signal="body_entered" from="shelter" to="shelter" method="_on_body_entered"]
 [connection signal="body_exited" from="shelter" to="shelter" method="_on_body_exited"]
 [connection signal="body_exited" from="shelter" to="Player" method="_on_shelter_body_exited"]
 [connection signal="timeout" from="UI/Rain_Timer/Timer" to="UI/Rain_Timer/Timer" method="_on_timeout"]
-[connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]

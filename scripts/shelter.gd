@@ -23,6 +23,10 @@ func _on_body_entered(body: Node2D) -> void:
 		else :
 			body.remove_coin(cost)
 			days += 1
+			%Rain.hide()
+			%Rain.emitting = false
+			%Rain.restart() # clear all spawned particles
+			%Timer.reset_countdown()
 			%Transition.transition()
 			%Day.text = "Days: %d" %days
 

@@ -13,7 +13,7 @@ func _ready():
 	start()
 
 func _on_timeout() -> void:
-	print("start the rain")
+	%Rain.show()
 	%Rain.emitting = true
 
 
@@ -23,3 +23,9 @@ func _process(delta: float) -> void:
 	else:
 		time_bar.value = 0
 	pass
+
+func reset_countdown():
+	stop()
+	start()
+	time_bar.max_value = wait_time
+	time_bar.value = wait_time
