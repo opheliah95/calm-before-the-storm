@@ -23,6 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 		else :
 			body.remove_coin(cost)
 			days += 1
+			%Transition.transition()
 			%Day.text = "Days: %d" %days
 
 

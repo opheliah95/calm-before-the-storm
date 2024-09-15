@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6lx2whpnlsjl"]
+[gd_scene load_steps=14 format=3 uid="uid://6lx2whpnlsjl"]
 
 [ext_resource type="PackedScene" uid="uid://7sddgac8ct48" path="res://scene/player.tscn" id="1_bh0us"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_mxxsy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://caj820lqjr2yg" path="res://coin.tscn" id="6_geki3"]
 [ext_resource type="Script" path="res://scene/shelter.gd" id="7_rwvn1"]
 [ext_resource type="Texture2D" uid="uid://4hykiwn5105d" path="res://assets/Items/shulter.png" id="8_2fuds"]
+[ext_resource type="PackedScene" uid="uid://dhg0ir8jeinbn" path="res://scene/transition.tscn" id="9_mknui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qrra"]
 size = Vector2(31, 40)
@@ -93,18 +94,18 @@ scale_amount_max = 0.8
 color_ramp = SubResource("Gradient_yknif")
 script = ExtResource("4_sj83q")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Rain_Timer" type="Node2D" parent="CanvasLayer"]
+[node name="Rain_Timer" type="Node2D" parent="UI"]
 
-[node name="Timer" type="Timer" parent="CanvasLayer/Rain_Timer"]
+[node name="Timer" type="Timer" parent="UI/Rain_Timer"]
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 2.0
 one_shot = true
 script = ExtResource("3_mxxsy")
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Rain_Timer"]
+[node name="ProgressBar" type="ProgressBar" parent="UI/Rain_Timer"]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -122,7 +123,7 @@ value = 17.49
 show_percentage = false
 script = ExtResource("4_km8pk")
 
-[node name="Day" type="Label" parent="CanvasLayer"]
+[node name="Day" type="Label" parent="UI"]
 unique_name_in_owner = true
 texture_filter = 1
 offset_top = 24.0
@@ -130,7 +131,7 @@ offset_right = 43.0
 offset_bottom = 47.0
 text = "Day: 0"
 
-[node name="Coin" type="Label" parent="CanvasLayer"]
+[node name="Coin" type="Label" parent="UI"]
 unique_name_in_owner = true
 texture_filter = 1
 offset_top = 48.0
@@ -147,7 +148,10 @@ position = Vector2(-103, 146)
 [node name="Coin4" parent="." instance=ExtResource("6_geki3")]
 position = Vector2(-71, 73)
 
+[node name="Transition" parent="." instance=ExtResource("9_mknui")]
+unique_name_in_owner = true
+
 [connection signal="body_entered" from="shelter" to="shelter" method="_on_body_entered"]
 [connection signal="body_exited" from="shelter" to="shelter" method="_on_body_exited"]
 [connection signal="body_exited" from="shelter" to="Player" method="_on_shelter_body_exited"]
-[connection signal="timeout" from="CanvasLayer/Rain_Timer/Timer" to="CanvasLayer/Rain_Timer/Timer" method="_on_timeout"]
+[connection signal="timeout" from="UI/Rain_Timer/Timer" to="UI/Rain_Timer/Timer" method="_on_timeout"]
