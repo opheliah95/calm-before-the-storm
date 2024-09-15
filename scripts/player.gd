@@ -5,7 +5,9 @@ const ACCELERATION=100;
 const DECELERATION = 500;
 var animation_state = null;
 var sprite = null;
+var direction = null
 func _ready():
+	direction = Vector2.DOWN
 	sprite = %Player_Sprites
 	animation_state = %PlayerAnimationTree.get("parameters/playback")
 	pass
@@ -15,7 +17,7 @@ func get_input() :
 	return input_direction
 	
 func _physics_process(delta: float):
-	var direction = get_input()
+	direction = get_input()
 	var horizontal_dir = Input.get_axis("left", "right")
 	velocity = direction * SPEED
 	move_and_slide()
@@ -24,11 +26,12 @@ func _physics_process(delta: float):
 	if horizontal_dir !=0:
 		sprite.flip_h = (horizontal_dir == 1)
 	print("the direction is: ", direction)
-	if velocity.length() > 0:
+	if direction != Vector2.ZERO:
 		%PlayerAnimationTree.set("parameters/Run/blend_position", direction)
+		%PlayerAnimationTree.set("parameters/Idle/blend_position", direction)
 		animation_state.travel("Run")
 	else:
-		%PlayerAnimationTree.set("parameters/Idle/blend_position", direction)
+		#%PlayerAnimationTree.set("parameters/Idle/blend_position", direction)
 		animation_state.travel("Idle")
 
 	#print("the velocity is: ", velocity)

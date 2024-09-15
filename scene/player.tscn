@@ -321,10 +321,10 @@ animation = &"idle_left"
 animation = &"idle-back"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8k3tk"]
-animation = &"idle-front"
+animation = &"idle-back"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xxppx"]
-animation = &"idle-back"
+animation = &"idle-front"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_216eo"]
 animation = &"idle_left"
@@ -475,5 +475,5 @@ unique_name_in_owner = true
 root_node = NodePath("%PlayerAnimationTree/..")
 tree_root = SubResource("AnimationNodeStateMachine_7166l")
 anim_player = NodePath("../PlayerAnimationPlayer")
-parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(0, 1)
 parameters/Run/blend_position = Vector2(0, 0)
