@@ -25,6 +25,8 @@ func _on_body_entered(body: Node2D) -> void:
 			days += 1
 			%Rain.hide()
 			%Rain.emitting = false
+			# play rain sound
+			%Rain_SFX.playing = false
 			%Rain.restart() # clear all spawned particles
 			%Timer.reset_countdown()
 			%Transition.transition()

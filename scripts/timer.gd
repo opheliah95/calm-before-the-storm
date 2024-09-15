@@ -16,6 +16,8 @@ func _ready():
 func _on_timeout() -> void:
 	%Rain.show()
 	%Rain.emitting = true
+	%Rain_SFX.playing = true
+	%Rain_SFX.seek(2)
 	increase_rate_timer.start()
 
 
