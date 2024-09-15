@@ -6,6 +6,7 @@ const DECELERATION = 500;
 var animation_state = null;
 var sprite = null;
 var direction = null
+var coin_count = 0
 func _ready():
 	direction = Vector2.DOWN
 	sprite = %Player_Sprites
@@ -34,7 +35,7 @@ func _physics_process(delta: float):
 		#%PlayerAnimationTree.set("parameters/Idle/blend_position", direction)
 		animation_state.travel("Idle")
 
-	#print("the velocity is: ", velocity)
-		
+func collect_coin():
+	coin_count += 1
+	%Coin.text = "Coins: %d" % coin_count
 	
-	pass
