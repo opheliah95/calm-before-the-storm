@@ -7,6 +7,9 @@ var animation_state = null;
 var sprite = null;
 var direction = null
 var coin_count = 0
+var health = 100;
+var hunger = 0;
+
 func _ready():
 	direction = Vector2.DOWN
 	sprite = %Player_Sprites
@@ -26,7 +29,7 @@ func _physics_process(delta: float):
 	# flip sprite if it is facing right
 	if horizontal_dir !=0:
 		sprite.flip_h = (horizontal_dir == 1)
-	print("the direction is: ", direction)
+	#print("the direction is: ", direction)
 	if direction != Vector2.ZERO:
 		%PlayerAnimationTree.set("parameters/Run/blend_position", direction)
 		%PlayerAnimationTree.set("parameters/Idle/blend_position", direction)
@@ -38,4 +41,12 @@ func _physics_process(delta: float):
 func collect_coin():
 	coin_count += 1
 	%Coin.text = "Coins: %d" % coin_count
-	
+
+func remove_coin(cost):
+	coin_count -= cost
+	if (coin_count <= 0):
+		coin_count =0
+	%Coin.text = "Coins: %d" % coin_count
+
+func count_coin():
+	return coin_count

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6lx2whpnlsjl"]
+[gd_scene load_steps=13 format=3 uid="uid://6lx2whpnlsjl"]
 
 [ext_resource type="PackedScene" uid="uid://7sddgac8ct48" path="res://scene/player.tscn" id="1_bh0us"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_mxxsy"]
@@ -6,6 +6,11 @@
 [ext_resource type="Script" path="res://scripts/rain.gd" id="4_sj83q"]
 [ext_resource type="Texture2D" uid="uid://dfb1nsem51ga5" path="res://assets/Effects/rain-drop.png" id="5_4x0r3"]
 [ext_resource type="PackedScene" uid="uid://caj820lqjr2yg" path="res://coin.tscn" id="6_geki3"]
+[ext_resource type="Script" path="res://scene/shelter.gd" id="7_rwvn1"]
+[ext_resource type="Texture2D" uid="uid://4hykiwn5105d" path="res://assets/Items/shulter.png" id="8_2fuds"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qrra"]
+size = Vector2(31, 40)
 
 [sub_resource type="Gradient" id="Gradient_yknif"]
 colors = PackedColorArray(0.381703, 0.381703, 0.381703, 1, 1, 1, 1, 1)
@@ -21,6 +26,47 @@ corner_radius_bottom_left = 5
 bg_color = Color(0.427451, 0.6, 0.6, 1)
 
 [node name="world" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Coin" parent="." instance=ExtResource("6_geki3")]
+
+[node name="Coin2" parent="." instance=ExtResource("6_geki3")]
+position = Vector2(-140, 50)
+
+[node name="shelter" type="Area2D" parent="."]
+position = Vector2(-140, 50)
+script = ExtResource("7_rwvn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="shelter"]
+texture = ExtResource("8_2fuds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shelter"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_5qrra")
+
+[node name="WarningLabel" type="Label" parent="shelter"]
+unique_name_in_owner = true
+visible = false
+offset_left = -65.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 49.0
+size_flags_horizontal = 4
+text = "Not enough Coin"
+
+[node name="Label" type="Label" parent="shelter"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -52.0
+offset_right = 29.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5 Coins"
 
 [node name="Player" parent="." instance=ExtResource("1_bh0us")]
 unique_name_in_owner = true
@@ -77,6 +123,7 @@ show_percentage = false
 script = ExtResource("4_km8pk")
 
 [node name="Day" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
 texture_filter = 1
 offset_top = 24.0
 offset_right = 43.0
@@ -91,9 +138,16 @@ offset_right = 43.0
 offset_bottom = 71.0
 text = "Coin: 0"
 
-[node name="Coin" parent="." instance=ExtResource("6_geki3")]
+[node name="Coin3" parent="." instance=ExtResource("6_geki3")]
+position = Vector2(-194, 126)
 
-[node name="Coin2" parent="." instance=ExtResource("6_geki3")]
-position = Vector2(-140, 50)
+[node name="Coin5" parent="." instance=ExtResource("6_geki3")]
+position = Vector2(-103, 146)
 
+[node name="Coin4" parent="." instance=ExtResource("6_geki3")]
+position = Vector2(-71, 73)
+
+[connection signal="body_entered" from="shelter" to="shelter" method="_on_body_entered"]
+[connection signal="body_exited" from="shelter" to="shelter" method="_on_body_exited"]
+[connection signal="body_exited" from="shelter" to="Player" method="_on_shelter_body_exited"]
 [connection signal="timeout" from="CanvasLayer/Rain_Timer/Timer" to="CanvasLayer/Rain_Timer/Timer" method="_on_timeout"]
